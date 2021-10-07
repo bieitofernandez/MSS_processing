@@ -1,7 +1,5 @@
 function [OUTPUT,SPEC]=COMPUTES_EVERYTHING(filename,nL,p0,pint,pend,pintD,pintGR,sL,sOV,Tdis,shsens,fit_noise,plt)
-    
-    % Agora mesmo calcula a epsilon axustando a Nasmyth e non cuadra
-    % tan ben cos do aparato
+
     if nargin<13
         plt=0;
         if nargin<12
