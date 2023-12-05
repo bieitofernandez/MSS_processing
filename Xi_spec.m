@@ -1,13 +1,16 @@
-function [Xiv,XiC,Xif,KBT,fit_flag, sXif,sKBT,MAD, MADf,MADc,MLKH,LKHratio,maxK,SPEC]  = Xi_spec(pres,x0,K1,fmax,KB,W,Tdis, sL, sOV,fit_noise,plt)
+function [Xiv,XiC,Xif,KBT,fit_flag, sXif,sKBT,MAD, MADf,MADc,MLKH,LKHratio,maxK,SPEC]  = Xi_spec(pres,x0,K1,fmax,KB,W,Tdis, sL, sOV,tau0,fit_noise,plt)
 
     Xiv = NaN;XiC=NaN;Xif=NaN;KBT=NaN;sXif = nan; sKBT = nan; MAD = NaN; MADf = NaN;MLKH=nan; LKHratio = nan; maxK = nan; fit_flag = 0;
     Pr = 7.56;
     DT = 1.44e-7;
-    if nargin<8
+    if nargin<9
         plt=0;
     end
-    if nargin<7
+    if nargin<=8
         fit_noise = 1;
+    end
+    if nargin<=7
+        tau0 = 7/1000;
     end
     %reduces number of points
     %x0 = x0(1:4:end);
@@ -54,13 +57,18 @@ function [Xiv,XiC,Xif,KBT,fit_flag, sXif,sKBT,MAD, MADf,MADc,MLKH,LKHratio,maxK,
     
     %correccion for time response
     PSDnc = PSD;
-    %Goto 2016
-    %tau = 0.005*W.^-0.32;
-    %(Gregg and Meagher, 1995)/ Peterson & Fer2014
-    tau0 = 0.012;
+
+    %%%%Goto 2016
+    %%%tau = 0.005*W.^-0.32;
+
+    %%%(Gregg and Meagher, 1995)/ Peterson & Fer2014
+    %%%tau0 = 0.012; %(now defined as input)
     tau = tau0*W.^-0.32;
+
     %simple
-    %tau = 0.012;
+    %tau = tau0;
+
+    %double pole
     H = 1./(1+(2*pi()*tau*fr).^2).^2;
     PSD = PSDnc./H;
     

@@ -148,7 +148,7 @@ function [eps,Kc,epsN,KcN,MAD,MADf, MADc,SPEC]=dis_spec(pres,x0,px0,K1,K2,Kn,vis
        NAS=nasmyth(eps,visco,K);
 
        MAD =  mean(abs(log10(PSD(iK1:iK3)./NAS(iK1:iK3))));
-       MADf = mean(abs(log10(PSD(iK1:iKn)./NAS(iK1:iKn))));
+       MADf = mean(abs(log10(PSD(iK1:iKn)./NAS2(iK1:iKn))));
        
        if plt~=0
             figure(1)

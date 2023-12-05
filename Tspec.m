@@ -30,7 +30,7 @@ end
  
 if spc=='K'    
     %Roget 2
-    q=3.9;
+    q=5.26;
     k=1.44e-7;
     phi=KB/sqrt(2*q);
     y=K/phi;
